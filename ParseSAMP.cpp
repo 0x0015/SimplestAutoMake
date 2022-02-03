@@ -45,15 +45,28 @@ void readSAMP(std::unordered_map<std::string, std::string>& Rules, std::string& 
 	std::vector<std::string> lines = SplitString(file, "\n");
 	for(int i=0;i<lines.size();i++){
 		std::vector<std::string> ruleText = SplitString(lines[i], ":");
+		uint8_t splitType = 0;//definitely there won't be more than 256 different split types, if not 2
 		if(ruleText.size() != 2){
 			ruleText = SplitString(lines[i], ":::");
+			splitType = 0;
 			if(ruleText.size() != 2){
-				std::cout<<"Unable to seperate key and replacement from: "<<lines[i]<<std::endl;
-				continue;
+				ruleText = SplitString(lines[i], ":+:");
+				splitType = 1;
+				if(ruleText.size() != 2){
+					std::cout<<"Unable to seperate key and replacement from: "<<lines[i]<<std::endl;
+					continue;
+				}
 			}
 		}
 		std::string key = trim(ruleText[0]);
 		std::string rule = trim(ruleText[1]);
-		Rules["{" + key + "}"] = rule;
+		switch(splitType){
+			case 0:
+				Rules["{" + key + "}"] = rule;
+				break;
+			case 1:
+				Rules["{" + key + "}"].append(" " + rule);
+				break;
+		}
 	}
 }

@@ -7,7 +7,7 @@
 #include "ApplyRules.hpp"
 
 void help(){
-	std::cout<<"Help:  SAM [Makefile] {Options}\nOptions:\n\t[-h]: show this help page\n\t[-p {platform...}]: specify to use a specific platform file\n\t[-l]: list the rules that will be applied\n\t[-n]: don't generate a Makefile\n\n\tclean:  deletes Makefile if it exists."<<std::endl;
+	std::cout<<"\tSimplestAutoMake v1.01\n\nHelp:  SAM [Makefile] {Options}\nOptions:\n\t[-h]: show this help page\n\t[-p {platform...}]: specify to use a specific platform file\n\t[-l]: list the rules that will be applied\n\t[-n]: don't generate a Makefile\n\n\tclean:  deletes Makefile if it exists."<<std::endl;
 }
 
 void platformHelp(){
