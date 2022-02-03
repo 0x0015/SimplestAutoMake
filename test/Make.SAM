@@ -1,0 +1,2 @@
+all:
+	{CXX} {CXX_OPTS} whatever.cpp -o {OUT}
