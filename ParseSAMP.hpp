@@ -3,4 +3,4 @@
 #include <vector>
 #include <unordered_map>
 
-void readSAMP(std::unordered_map<std::string, std::string>& Rules, std::string& filename);
+void parseSAMP(std::unordered_map<std::string, std::string>& Rules, std::vector<std::string>& lines);

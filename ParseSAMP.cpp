@@ -37,12 +37,7 @@ std::string trim(std::string& str){
 	return(ltrim(rtrim(s)));
 }
 
-void readSAMP(std::unordered_map<std::string, std::string>& Rules, std::string& filename){
-	std::string file = readFile(filename);
-	if(file == ""){
-		std::cout<<"Unable to read file/contents was empty: "<<filename<<std::endl;
-	}
-	std::vector<std::string> lines = SplitString(file, "\n");
+void parseSAMP(std::unordered_map<std::string, std::string>& Rules, std::vector<std::string>& lines){
 	for(int i=0;i<lines.size();i++){
 		std::vector<std::string> ruleText = SplitString(lines[i], ":");
 		uint8_t splitType = 0;//definitely there won't be more than 256 different split types, if not 2
@@ -53,8 +48,12 @@ void readSAMP(std::unordered_map<std::string, std::string>& Rules, std::string& 
 				ruleText = SplitString(lines[i], ":+:");
 				splitType = 1;
 				if(ruleText.size() != 2){
-					std::cout<<"Unable to seperate key and replacement from: "<<lines[i]<<std::endl;
-					continue;
+					ruleText = SplitString(lines[i], ":-:");
+					splitType = 2;
+					if(ruleText.size() != 2){
+						std::cout<<"Unable to seperate key and replacement from: "<<lines[i]<<std::endl;
+						continue;
+					}
 				}
 			}
 		}
@@ -66,6 +65,9 @@ void readSAMP(std::unordered_map<std::string, std::string>& Rules, std::string& 
 				break;
 			case 1:
 				Rules["{" + key + "}"].append(" " + rule);
+				break;
+			case 2:
+				Rules["{" + key + "}"].append(rule);
 				break;
 		}
 	}

@@ -1,0 +1,2 @@
+#include "test/test1.SAMP"
+DEBUG_OPTS : -g 

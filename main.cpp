@@ -4,10 +4,11 @@
 #include "SimpleCppTextFileHandler/file.hpp"
 #include "platformHelper.hpp"
 #include "ParseSAMP.hpp"
+#include "PreprocessSAMP.hpp"
 #include "ApplyRules.hpp"
 
 void help(){
-	std::cout<<"\tSimplestAutoMake v1.01\n\nHelp:  SAM [Makefile] {Options}\nOptions:\n\t[-h]: show this help page\n\t[-p {platform...}]: specify to use a specific platform file\n\t[-l]: list the rules that will be applied\n\t[-n]: don't generate a Makefile\n\n\tclean:  deletes Makefile if it exists."<<std::endl;
+	std::cout<<"\tSimplestAutoMake v1.02\n\nHelp:  SAM [Makefile] {Options}\nOptions:\n\t[-h]: show this help page\n\t[-p {platform...}]: specify to use a specific platform file\n\t[-l]: list the rules that will be applied\n\t[-n]: don't generate a Makefile\n\n\tclean:  deletes Makefile if it exists."<<std::endl;
 }
 
 void platformHelp(){
@@ -140,7 +141,8 @@ int main(int argc, char** argv){
 	std::unordered_map<std::string, std::string> Rules;
 
 	for(int i=0;i<FilesSorted.size();i++){
-		readSAMP(Rules, FilesSorted[i]);
+		std::vector<std::string> SAMP = preprocessSAMP(FilesSorted[i]);
+		parseSAMP(Rules, SAMP);
 	}
 
 	if(args.hasArg("-l")){

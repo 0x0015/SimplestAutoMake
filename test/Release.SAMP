@@ -1,1 +1,1 @@
-CXX_OPTS : -O2 
+DEBUG_OPTS : -O2

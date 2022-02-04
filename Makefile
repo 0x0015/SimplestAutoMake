@@ -1,5 +1,6 @@
 OBJS	= main.cpp.o\
 	  platformHelper.cpp.o \
+	  PreprocessSAMP.cpp.o \
 	  ParseSAMP.cpp.o \
 	  ApplyRules.cpp.o \
 	  ArguementHandler/ArgHandle.cpp.o\

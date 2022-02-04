@@ -1,4 +1,4 @@
 CXX : mingw++
 CC : mingwcc
 OUT : main.exe
-CXX_OPTS : -g
+CXX_OPTS : -std=c++17
